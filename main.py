@@ -1,9 +1,6 @@
 import os
 import shutil
 
-
-update_existing = True
-
 # to
 redirect_path = 'C:\your\new\path\DJI_001'
 
