@@ -17,8 +17,7 @@ notice_when_folder_created = True
 
 def check_existing_folders():
     global existing_folders
-    global redirect_path
-
+    
     check_path = os.walk(redirect_path)
 
     existing_folders = {}
