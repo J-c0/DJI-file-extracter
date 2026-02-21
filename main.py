@@ -1,20 +1,24 @@
 import os
 import shutil
 
+
 # to
-redirect_path = 'C:\your\new\path\DJI_001'
+redirect_path = 'D:\Photos\Drone\DJI_001'
+# redirect_path = 'D:\Photos\Drone\\test area\\target'
 
 # from
 target_path = 'F:\DCIM\DJI_001'
+# target_path = 'D:\Photos\Drone\\test area\\test'
 
-notice_when_file_copied = True
-notice_when_file_already_existed = True
-notice_when_folder_already_existed = True
-notice_when_folder_created = True
+notice_when_file_copied = True              # Green
+notice_when_file_already_existed = True     # Yellow
+notice_when_folder_already_existed = True   # Yellow
+notice_when_folder_created = True           # Green 
 
 def check_existing_folders():
     global existing_folders
-    
+    global redirect_path
+
     check_path = os.walk(redirect_path)
 
     existing_folders = {}
@@ -41,18 +45,21 @@ def create_dir(name):
     
     if name in existing_folders:
         if notice_when_folder_already_existed: 
-            print(f'Folder {name} already exists')
+            print(f'\033[93m  Folder {name} already exists  \033[00m')
+            # yellow text
         return
     try:
         os.mkdir(f'{redirect_path}\{name}')
     except FileExistsError:
 
         if notice_when_folder_already_existed: 
-            print(f'Folder {name} already exists')
+            print(f'\033[91m  Folder {name} already exists  \033[00m')
+            # red text
 
     else:
         if notice_when_folder_created:
-            print(f'Folder {name} created')
+            print(f'\033[92m  Folder {name} created  \033[00m')
+            # green text
 
 try:
     files = os.walk(target_path)
@@ -66,6 +73,7 @@ for root, dirs, file_names in files:
     date_set = set({})
     for file in file_names:
         
+        # only copying the file in the DJI_001, PANORAMA and HYPERLAPSE are ignored
         if 'DJI_' in file:
             
             # extract date from file name
@@ -90,11 +98,12 @@ for root, dirs, file_names in files:
             # check if file already exists in new location
             if os.path.exists(f'{redirect_path}\\{new_folder_name}\\{file}'):
                 if notice_when_file_already_existed:
-                    print(f'File {file} already exists in folder {new_folder_name}')                # testing
+                    print(f'\033[93m  File {file} already exists in folder {new_folder_name}  \033[00m')                # testing
+                    # yellow text
                 continue
             elif notice_when_file_copied:
-                print(f'Copying file {file} to folder {new_folder_name}')
-
+                # Green text
+                print(f'\033[92m  File {file} copied to folder {new_folder_name}  \033[00m')
 
             shutil.copyfile(f'{target_path}\\{file}',f'{redirect_path}\\{new_folder_name}\\{file}')
 
