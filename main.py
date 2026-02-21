@@ -40,7 +40,6 @@ check_existing_folders()
 
 
 def create_dir(name):
-    global redirect_path
     
     if name in existing_folders:
         if notice_when_folder_already_existed: 
@@ -111,4 +110,4 @@ for root, dirs, file_names in files:
         
 if 'root' not in locals():
     raise Exception('No files found in target path')
-print('All files transferred')
+print('\033[92m  All files transferred  \033[00m')
