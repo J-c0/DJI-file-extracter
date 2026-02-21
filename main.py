@@ -4,11 +4,9 @@ import shutil
 
 # to
 redirect_path = 'D:\Photos\Drone\DJI_001'
-# redirect_path = 'D:\Photos\Drone\\test area\\target'
 
 # from
 target_path = 'F:\DCIM\DJI_001'
-# target_path = 'D:\Photos\Drone\\test area\\test'
 
 notice_when_file_copied = True              # Green
 notice_when_file_already_existed = True     # Yellow
